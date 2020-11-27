@@ -15,7 +15,7 @@ class WebServer:
     konnichiwa_service = RpcProxy('konnichiwa_service')
 
     @http('GET', '/')
-    def home(self, request):
+    def home(self):
         return self.konnichiwa_service.konnichiwa()
 
 
@@ -26,3 +26,7 @@ class MessageService:
     @rpc
     def get_message(self, message_id):
         return self.message_store.get_message(message_id)
+
+    @rpc
+    def save_message(self, message):
+        message_id = self.message_store.save_message(message)
