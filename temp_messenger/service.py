@@ -2,15 +2,15 @@ from nameko.rpc import rpc, RpcProxy
 from nameko.web.handlers import http
 
 
-class KonnichiwaService: 
-    name = 'konnichiwa_service' 
-    
-    @rpc 
-    def konnichiwa(self): 
+class KonnichiwaService:
+    name = 'konnichiwa_service'
+
+    @rpc
+    def konnichiwa(self):
         return 'Konnichiwa!'
 
-class WebServer:
 
+class WebServer:
     name = 'web_server'
     konnichiwa_service = RpcProxy('konnichiwa_service')
 
