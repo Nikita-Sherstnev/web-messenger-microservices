@@ -30,3 +30,4 @@ class MessageService:
     @rpc
     def save_message(self, message):
         message_id = self.message_store.save_message(message)
+        return message_id
