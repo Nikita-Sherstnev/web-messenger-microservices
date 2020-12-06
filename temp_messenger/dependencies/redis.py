@@ -15,6 +15,7 @@ class MessageStore(DependencyProvider):
     def get_dependency(self, worker_ctx):
         return self.client
 
+
 class RedisClient:
 
     def __init__(self, url):
@@ -34,18 +35,19 @@ class RedisClient:
 
     def save_message(self, message):
         message_id = uuid.uuid4().hex
-        self.redis.set(message_id, message)
+        self.redis.set(message_id, message, ex=10)
 
         return message_id
 
     def get_all_messages(self):
         return [
-                {
-                    'id': message_id,
-                    'message': self.redis.get(message_id)
-                }
+            {
+                'id': message_id,
+                'message': self.redis.get(message_id)
+            }
             for message_id in self.redis.keys()
-            ]
+        ]
+
 
 class RedisError(Exception):
     pass
