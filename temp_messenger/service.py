@@ -15,7 +15,7 @@ class WebServer:
     konnichiwa_service = RpcProxy('konnichiwa_service')
 
     @http('GET', '/')
-    def home(self):
+    def home(self, request):
         return self.konnichiwa_service.konnichiwa()
 
 
